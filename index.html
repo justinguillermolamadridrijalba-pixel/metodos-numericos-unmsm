@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora Numerica</title>
+    <link rel="stylesheet" href="style.css">
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+    <script src="https://cdn.plot.ly/plotly-2.32.0.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <!-- Encabezado con Logo y Facultad -->
+        <div class="header-oficial">
+            <img src="logo-unmsm.png" alt="Logo UNMSM" class="logo">
+            <div>
+                <h1>Métodos Numéricos</h1>
+                <h3 class="subtitulo">Facultad de Ingeniería Electrónica y Eléctrica</h3>
+            </div>
+        </div>
+
+        <p style="text-align: center;">Sube tu archivo Excel. Asegúrate de que los encabezados de las columnas sean <strong>x</strong> e <strong>y</strong>.</p>
+        
+        <!-- Input para cargar el archivo -->
+        <input type="file" id="excel-file" accept=".xlsx, .xls">
+        
+        <!-- Botones de los métodos interactivos -->
+        <div class="buttons">
+            <button id="btn-lagrange">📈 Interpolación de Lagrange</button>
+            <button id="btn-diferencias">📉 Diferencias Centradas</button>
+            <button id="btn-trapecio">📐 Regla del Trapecio</button>
+            <button id="btn-simpson">📊 Simpson 1/3</button>
+            <button id="btn-spline" class="btn-especial">🔗 Splines Cúbicos</button>
+        </div>
+
+        <div id="data-preview"></div>
+        <div id="plot-container"></div>
+        <div id="resultado-matematico"></div>
+    </div>
+    
+    <!-- Pie de página (Footer) Académico -->
+    <footer>
+        <p><strong>Curso:</strong> Métodos Numéricos | <strong>Docente:</strong> JOSUE MIRANDA</p>
+        <p><strong>Integrantes:</strong> Justin Lamadrid, Jose Rufasto, Andy Torres</p>
+        <p>Universidad Nacional Mayor de San Marcos - 2026</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
