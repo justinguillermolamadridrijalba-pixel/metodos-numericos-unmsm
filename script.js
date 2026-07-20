@@ -12,11 +12,37 @@ document.getElementById('excel-file').addEventListener('change', function(evento
         const datos = new Uint8Array(e.target.result);
         const libro = XLSX.read(datos, {type: 'array'});
         const hoja = libro.Sheets[libro.SheetNames[0]];
-        const datosJSON = XLSX.utils.sheet_to_json(hoja);
+        
+        // CORRECCIÓN: Le pedimos que lea la hoja como una matriz (arreglos dentro de arreglos)
+        const datosJSON = XLSX.utils.sheet_to_json(hoja, {header: 1});
         procesarYMostrarDatos(datosJSON);
     };
     lector.readAsArrayBuffer(archivo);
 });
+
+function procesarYMostrarDatos(datos) {
+    valoresX = [];
+    valoresY = [];
+    let tablaHTML = '<h3>Datos Cargados:</h3><table><tr><th>X (Columna 1)</th><th>Y (Columna 2)</th></tr>';
+    
+    datos.forEach(fila => {
+        // Verificamos que la fila no esté vacía y tenga al menos 2 columnas
+        if (fila.length >= 2) {
+            let x = parseFloat(fila[0]);
+            let y = parseFloat(fila[1]);
+            
+            // Si ambos valores son números (esto ignora los títulos de texto automáticamente)
+            if (!isNaN(x) && !isNaN(y)) {
+                valoresX.push(x);
+                valoresY.push(y);
+                tablaHTML += `<tr><td>${x}</td><td>${y}</td></tr>`;
+            }
+        }
+    });
+    tablaHTML += '</table>';
+    document.getElementById('data-preview').innerHTML = tablaHTML;
+    document.getElementById('resultado-matematico').innerHTML = ''; 
+}
 
 function procesarYMostrarDatos(datos) {
     valoresX = [];
